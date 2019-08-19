@@ -1,6 +1,9 @@
 # **Final Project**
 _this is a clone from the private repository of INFO 201 final project in collaboration with Hongfei Lin (@hfl22-1838397), Yinzhou Wang (@wyzxxywl), Jie Bai (@baij555)_
 
+- [mid-point delivery](https://nussarafirn.github.io/info-201-final-project/scripts/)
+- [final delivery](https://mightymango.shinyapps.io/final-project-mightymango/)
+
 ## Domain of Interest
 
 * **Why are you interested in this field/domain?**
