@@ -1,0 +1,16 @@
+h1 {
+    font-family:'Georgia';
+    font-weight: bolder;
+    color: rgb(95, 17, 128);
+    font-size: 300%;
+}
+p {
+    color: rgb(0, 0, 0);
+    font-size: 160%;
+}
+.key {
+    font-family:'Georgia';
+    font-weight: bold;
+    color: rgb(168, 126, 235);
+    font-size: 160%;
+}

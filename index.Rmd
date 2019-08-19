@@ -1,0 +1,81 @@
+---
+title: "Midpoint Deliverable"
+output: html_document
+---
+```{r setup, echo = FALSE, message = F,include=FALSE}
+library("knitr")
+library("dplyr")
+source("scripts/table-of-summary-information.R")
+source("scripts/top-10-most-committed-crimes.R")
+source("scripts/chicago_map.R")
+source("scripts/summary-information.R")
+source("scripts/plot_heat.R")
+```
+
+## Crime And Location In The City Of Chicago
+
+### Introduction
+
+Eventhough crime data may kept confidential due to people's privacy, we are interested to make the best use of open datasets to promote awareness of personal safety and of possible research purposes. In this case, we want to explore the _relationship between crime type and location_ referring to the Chicago Crime dataset of incidents occurred in the city since 2001 to as recent as 7 days ago, gathered and publicized by _[Chicago Police Department](https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2)_
+
+### Summary Paragraph
+
+```{r, echo=FALSE, message = F, include=FALSE}
+info <- get_summary_info(crime_summary)
+info$total
+info$arrest_rate
+info$most_Freq
+info$freq_crime
+info$rate
+info$LD
+```
+
+The dataset we used consists with quiet large and specific data such as estimate date and time, whether or not criminals were arrested, whether these incidents are domestic violence, even the exact latitude and longitude of location. Our choosen set include every incidents from 2009 to 2019. We chose the year of 2019 as a sample size to calculate the the summary information. They are the the total number of incidents occured, the arrest rate relative to that, the most frequently occured crime, and its percentage relative to the total number of crime and the location that has the highest crime rate. In the year of 2019, the City of Chicago had `r info$total` crimes occured, and the arrest rate is `r info$arrest_rate`%, among all the most frequently occured crime is **`r info$most_Freq`**, it counts for `r info$rate`% of the total amount of crime. In addition, **`r info$LD`** as a typical location description has the highest crime rate among all 146 locations recorded.( Noted that all numbers involved calculation of percentage are rounded to two decimals.)
+
+
+```{r pressure, echo=FALSE}
+```
+
+### Summary Table
+
+This table shows the aggregate number of crime occurred in different recorded typical locations and the percentage of proportion relative to the total number of crime in the City of Chicago in the year of 2019. This table is an extraction of the top 20 of such statistic and is arranged by decreasing number of crime rate. This information is displayed to show that more crime occurred in residential and semi-public areas than public areas. ( Noted that all numbers involved calculation of percentage are rounded to two decimals.)
+
+```{r kable_example, echo = FALSE, message = F}
+df <- get_summary_table(crime_summary)
+colnames(df) <- c("Location Description Recorded",
+                  "Number Of Crime Occurred",
+                  "Percent of The Number of TotalCrime")
+kable(df)
+```
+
+### Charts
+
+#### Geographic Maps
+
+This map shows the _locations of top three type of crimes_ comitted in chicago in 2019, the red dot represents _battery_, the blue point represent _criminal_damage_, and the green point represents _the theft activity_. The map shows _what type of crime is common at what area in chicago_. From the graph, we can see that theft activity occurs mostly **downtown**, battery often occurs in **west** area of chicago, and less crime are commited in southwest area.
+
+```{r, echo=FALSE, message = F, warning=F}
+chart2
+```
+
+#### Bar Chart
+
+The bar chart displays the _top ten_ most committed types of crime in Chicago from 2009 to now. Each bar represents the total frequency that each crime type occurs in the 10-year period. It is clear that the frequency of **theft and battery** are significantly higher than the rest. 
+
+```{r, echo=FALSE}
+chart
+```
+
+#### Heat Map
+
+This heat map intended to show the relationship between the amount of crime in each type among different districts in the city of Chicago over the past ten years(2009 until present). We provided both graphs to show the different information that represents each of them as well as the district map to give a better understanding of locations of each district. 
+
+We can clearly see from the heat map _without a log_ scale on _which district committed the most crimes_ and _what were the most committed crime type_. Which conveys similar information as we found from other graphs above that **theft and battery** are the most popular committed crime type, and the **west side** district has committed the most crimes. Meanwhile, in the _log scale graph_, we can see in more detail on which other types of crime besides those most popular ones have people in Chicago committed by the color scale.
+
+```{r, echo=FALSE}
+htmap_with_log
+htmap_no_log
+```
+![Map of Districts In City of Chicago](img/Map_of_the_Community_Areas_and_'Sides'_of_the_City_of_Chicago.svg) 
+
+This image is from [wikipedia.org](https://en.wikipedia.org/wiki/Community_areas_in_Chicago)
